@@ -16,6 +16,7 @@ test("shows awarded points as a successful payment", () => {
   );
 
   assert.equal(view.title, "1,500 points credited");
+  assert.equal(view.description, "Your rent payment was processed successfully.");
   assert.equal(view.tone, "success");
   assert.equal(view.progressPercent, 1.5);
 });
@@ -27,6 +28,7 @@ test("shows a duplicate event as skipped rather than credited", () => {
   );
 
   assert.equal(view.title, "Duplicate event skipped");
+  assert.match(view.description, /already processed/i);
   assert.equal(view.tone, "neutral");
 });
 
@@ -37,6 +39,7 @@ test("shows when the member has reached the monthly cap", () => {
   );
 
   assert.equal(view.title, "Monthly cap reached");
+  assert.match(view.description, /monthly points limit/i);
   assert.equal(view.tone, "warning");
   assert.equal(view.progressPercent, 100);
 });
